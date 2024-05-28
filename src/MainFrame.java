@@ -44,7 +44,7 @@ public class MainFrame extends Frame {
                 if (listingDAO.deleteListing(selectedListing.getId(), user.getId())) {
                     loadListings();
                 } else {
-
+                    lblmessage.setText("Failed to delete listing");
                 }
             }
         });
