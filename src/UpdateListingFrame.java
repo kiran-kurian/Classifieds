@@ -9,6 +9,7 @@ public class UpdateListingFrame extends Frame {
     private TextField tfTitle, tfDescription;
     private Button btnSubmit, btnCancel;
     private MainFrame mainFrame;
+    Label lblMessage;
 
     public UpdateListingFrame(User user, Listing listing, MainFrame mainFrame) {
         this.user = user;
@@ -38,9 +39,9 @@ public class UpdateListingFrame extends Frame {
                 String description = tfDescription.getText();
                 if (listingDAO.updateListing(listing.getId(), user.getId(), title, description)) {
                     mainFrame.loadListings();
-                    dispose(); // Close the UpdateListingFrame
+                    dispose(); 
                 } else {
-                    // Handle error
+                    lblMessage.setText("Failed to update listing");
                 }
             }
         });
@@ -48,7 +49,7 @@ public class UpdateListingFrame extends Frame {
         btnCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose(); // Close the UpdateListingFrame
+                dispose();
             }
         });
 

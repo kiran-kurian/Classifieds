@@ -8,7 +8,7 @@ public class MainFrame extends Frame {
     private List<Listing> listings;
     private java.awt.List list;
     private Button btnAdd, btnDelete, btnUpdate, btnLogout;
-    private Label lblmessage;
+    private Label lblmessage, lblmessage1;
 
     public MainFrame(User user) {
         this.user = user;
@@ -44,7 +44,7 @@ public class MainFrame extends Frame {
                 if (listingDAO.deleteListing(selectedListing.getId(), user.getId())) {
                     loadListings();
                 } else {
-                    lblmessage.setText("Failed to delete listing");
+                    lblmessage1.setText("Failed to delete listing");
                 }
             }
         });
@@ -56,9 +56,9 @@ public class MainFrame extends Frame {
                 if (selectedIndex >= 0) {
                     Listing selectedListing = listings.get(selectedIndex);
                     if (selectedListing.getUserId() == user.getId()) {
-                        new UpdateListingFrame(user, selectedListing, MainFrame.this); // Pass the listing to update
+                        new UpdateListingFrame(user, selectedListing, MainFrame.this); 
                     } else {
-                        // Handle error: only the owner can update
+                        lblmessage.setText("Only owner can update");
                     }
                 }
             }
@@ -67,8 +67,8 @@ public class MainFrame extends Frame {
         btnLogout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose(); // Close the MainFrame
-                new LoginFrame(); // Show the login frame again
+                dispose();
+                new LoginFrame(); 
             }
         });
         addWindowListener(new WindowAdapter() {
